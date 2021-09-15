@@ -18,6 +18,18 @@ describe 'Parking API' do
 
         run_test!
       end
+
+      response '422', 'empty plate' do
+        let(:parking) { { plate: '' } }
+
+        run_test!
+      end
+
+      response '422', 'invalid plate' do
+        let(:parking) { { plate: 'PLATE' } }
+
+        run_test!
+      end
     end
   end
 end
