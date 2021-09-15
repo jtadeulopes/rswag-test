@@ -3,7 +3,8 @@ require 'swagger_helper'
 describe 'Parking API' do
   path '/parkings' do
     post 'Creates a parking' do
-      consumes 'application/json', 'application/xml'
+      consumes 'application/json'
+      produces 'application/json'
 
       parameter name: :parking, in: :body, schema: {
         type: :object,
