@@ -1,0 +1,60 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/parkings":
+    post:
+      summary: Creates a parking
+      parameters: []
+      responses:
+        '201':
+          description: parking created
+        '422':
+          description: invalid plate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                plate:
+                  type: string
+              required:
+              - plate
+  "/parkings/{id}/pay":
+    put:
+      summary: Pay parking
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: paid parking
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  ticket:
+                    type: string
+                  plate:
+                    type: string
+                  paid:
+                    type: boolean
+                required:
+                - id
+                - plate
+                - ticket
+                - paid
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com
