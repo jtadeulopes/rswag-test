@@ -22,4 +22,25 @@ RSpec.describe Parking, type: :model do
       end
     end
   end
+
+  context 'instance methods' do
+    let!(:parking) { Parking.create!(plate: 'ABC-1234') }
+
+    describe '#pay!' do
+      it 'updates the paid at value and mark parking as paid' do
+        parking.pay!
+
+        expect(parking.paid?).to be true
+        expect(parking.paid_at).to be_instance_of(ActiveSupport::TimeWithZone)
+      end
+
+      context "when already paid" do
+        it 'not change the paid at value' do
+          parking.pay!
+
+          expect { parking.pay! }.to_not change { parking.paid_at }
+        end
+      end
+    end
+  end
 end

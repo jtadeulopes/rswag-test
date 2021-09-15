@@ -33,4 +33,28 @@ describe 'Parking API' do
       end
     end
   end
+
+  path '/parkings/{id}/pay' do
+    put 'Pay parking' do
+      consumes 'application/json'
+      produces 'application/json'
+
+      parameter name: :id, :in => :path, :type => :string
+
+      response '200', 'paid parking' do
+        schema type: :object,
+          properties: {
+            id: { type: :integer },
+            ticket: { type: :string },
+            plate: { type: :string },
+            paid: { type: :boolean }
+          },
+          required: [ 'id', 'plate', 'ticket', 'paid' ]
+
+        let(:id) { Parking.create(plate: 'ABC-1234').id }
+
+        run_test!
+      end
+    end
+  end
 end

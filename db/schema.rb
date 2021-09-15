@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2021_09_15_181000) do
   create_table "parkings", force: :cascade do |t|
     t.string "plate", null: false
     t.boolean "paid", default: false
+    t.datetime "paid_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
